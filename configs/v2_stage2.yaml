@@ -1,0 +1,56 @@
+experiment:
+  name: v2_stage2
+
+seed: 43
+
+environment:
+  num_scenarios: 300
+  start_seed: 0
+  traffic_density: 0.08
+  random_traffic: true
+  map: 4
+  horizon: 1000
+  truncate_as_terminate: false
+  use_render: false
+  image_observation: false
+  success_reward: 100.0
+  out_of_road_penalty: 20.0
+  crash_vehicle_penalty: 25.0
+  crash_object_penalty: 20.0
+  crash_sidewalk_penalty: 10.0
+  driving_reward: 1.0
+  speed_reward: 0.02
+  use_lateral_reward: true
+  out_of_route_done: true
+  vehicle_config:
+    lidar:
+      num_lasers: 120
+      distance: 50
+      num_others: 4
+    show_lidar: false
+
+training:
+  total_timesteps: 700000
+  learning_rate: 0.0001
+  n_steps: 2048
+  batch_size: 256
+  n_epochs: 10
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.15
+  ent_coef: 0.002
+  checkpoint_freq: 50000
+
+evaluation:
+  episodes: 20
+  start_seed: 1000
+  deterministic: true
+
+video:
+  enabled: true
+  seed: 1000
+  fps: 10
+  frame_interval: 2
+  screen_size: 512
+  max_steps: 1000
+

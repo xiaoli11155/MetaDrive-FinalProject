@@ -1,0 +1,44 @@
+seed: 0
+
+environment:
+  num_scenarios: 100
+  start_seed: 0
+  traffic_density: 0.1
+  random_traffic: true
+  map: 4
+  horizon: 1000
+  truncate_as_terminate: false
+  use_render: false
+  image_observation: false
+  vehicle_config:
+    lidar:
+      num_lasers: 120
+      distance: 50
+      num_others: 4
+    show_lidar: false
+
+training:
+  total_timesteps: 1000000
+  learning_rate: 0.0003
+  n_steps: 2048
+  batch_size: 256
+  n_epochs: 10
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.01
+  checkpoint_freq: 50000
+
+evaluation:
+  episodes: 20
+  start_seed: 1000
+  deterministic: true
+
+video:
+  enabled: true
+  seed: 1000
+  fps: 10
+  frame_interval: 2
+  screen_size: 512
+  max_steps: 1000
+

@@ -1,0 +1,68 @@
+[38;20m[INFO] Environment: MetaDriveEnv[0m
+[38;20m[INFO] MetaDrive version: 0.4.3[0m
+[38;20m[INFO] Sensors: [lidar: Lidar(), side_detector: SideDetector(), lane_line_detector: LaneLineDetector()][0m
+[38;20m[INFO] Render Mode: none[0m
+[38;20m[INFO] Horizon (Max steps per agent): 1000[0m
+[38;20m[INFO] Assets version: 0.4.3[0m
+[38;20m[INFO] Known Pipes: wglGraphicsPipe[0m
+[38;20m[INFO] Start Scenario Index: 0, Num Scenarios : 200[0m
+[38;20m[INFO] Episode ended! Scenario Index: 42 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 145 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 175 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 151 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 121 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 78 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 148 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 160 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 193 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 195 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 88 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 106 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 143 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 49 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 65 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 8 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 192 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 35 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 165 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 2 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 193 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 173 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 108 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 94 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 131 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 21 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 129 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 109 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 9 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 132 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 173 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 137 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 124 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 195 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 128 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 51 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 185 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 147 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 69 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 70 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 140 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 69 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 137 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 171 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 141 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 112 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 102 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 62 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 16 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 148 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 161 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 18 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 72 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 36 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 65 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 40 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 62 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 100 Reason: out_of_road.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 190 Reason: arrive_dest.[0m
+[38;20m[INFO] Episode ended! Scenario Index: 154 Reason: arrive_dest.[0m

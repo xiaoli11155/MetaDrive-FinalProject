@@ -1,0 +1,10 @@
+metadrive-simulator==0.4.3
+stable-baselines3==2.4.1
+torch==2.5.1
+gymnasium==1.0.0
+numpy==1.26.4
+pandas==2.2.3
+tensorboard==2.18.0
+PyYAML==6.0.2
+rich==13.9.4
+
