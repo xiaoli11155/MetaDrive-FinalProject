@@ -1,6 +1,0 @@
-extends: v4_guided_control.yaml
-
-experiment:
-  name: v4_guided_sign_fixed
-
-# Pure PPO from a randomly initialized policy. No BC or old checkpoint.

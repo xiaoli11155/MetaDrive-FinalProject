@@ -4,3 +4,11 @@ __pycache__/
 .idea/
 .vscode/
 
+# Legacy V1-V4 experiments are kept locally but not published.
+checkpoints/v[1-4]_*/
+configs/v[1-4]_*.yaml
+datasets/v[1-4]_*/
+logs/v[1-4]_*/
+metrics/v[1-4]_*/
+videos/v[1-4]_*/
+
