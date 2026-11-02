@@ -1,0 +1,6 @@
+model=ppo_metadrive_250000_steps.zip
+steps=250000
+success=50.0%
+collision=10.0%
+out_of_road=40.0%
+mean_reward=597.71

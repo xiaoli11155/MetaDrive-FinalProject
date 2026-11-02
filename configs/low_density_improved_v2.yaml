@@ -1,0 +1,11 @@
+extends: low_density_improved.yaml
+
+experiment:
+  name: low_density_improved_v2
+
+environment:
+  traffic_state_observation: true
+
+training:
+  total_timesteps: 750000
+

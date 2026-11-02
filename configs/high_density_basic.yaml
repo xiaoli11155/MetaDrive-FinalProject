@@ -1,0 +1,21 @@
+extends: low_density_after_no_traffic.yaml
+
+experiment:
+  name: high_density_basic
+
+environment:
+  traffic_density: 0.15
+  random_traffic: true
+
+training:
+  total_timesteps: 750000
+  learning_rate: 0.00005
+  ent_coef: 0.001
+  checkpoint_freq: 50000
+
+evaluation:
+  episodes: 20
+  start_seed: 1000
+
+video:
+  seed: 1000

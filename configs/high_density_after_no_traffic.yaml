@@ -1,0 +1,8 @@
+extends: high_density_basic.yaml
+
+experiment:
+  name: high_density_after_no_traffic
+
+training:
+  total_timesteps: 750000
+

@@ -15,6 +15,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Evaluate a trained PPO agent")
     parser.add_argument("model", type=Path)
     parser.add_argument("--episodes", type=int)
+    parser.add_argument("--start-seed", type=int, help="Override evaluation start seed")
     parser.add_argument("--render", action="store_true")
     parser.add_argument("--config", default=str(PROJECT_ROOT / "configs" / "default.yaml"))
     args = parser.parse_args()
@@ -22,10 +23,11 @@ def main() -> None:
     config = load_config(args.config)
     eval_config = config["evaluation"]
     episodes = args.episodes or eval_config["episodes"]
+    start_seed = args.start_seed if args.start_seed is not None else eval_config["start_seed"]
     env = make_env(
         config,
         render=args.render,
-        start_seed=eval_config["start_seed"],
+        start_seed=start_seed,
         num_scenarios=episodes,
     )
     model = PPO.load(args.model)
@@ -34,7 +36,7 @@ def main() -> None:
 
     try:
         for episode in range(episodes):
-            observation, _ = env.reset(seed=eval_config["start_seed"] + episode)
+            observation, _ = env.reset(seed=start_seed + episode)
             episode_reward = 0.0
             terminated = truncated = False
             final_info = {}

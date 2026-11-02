@@ -1,0 +1,77 @@
+experiment:
+  name: v4_skill_reward
+
+# SB3 passes seed+i to each vector worker on its first reset. Keep those
+# initial seeds inside MetaDrive's configured training scenario range.
+seed: 100
+
+environment:
+  num_scenarios: 50
+  start_seed: 100
+  traffic_density: 0.0
+  random_traffic: false
+  map: 3
+  horizon: 1500
+  truncate_as_terminate: false
+  use_render: false
+  image_observation: false
+
+  skill_reward: true
+  skill_reward_config:
+    straight_target_speed: 30.0
+    minimum_curve_speed: 12.0
+    minimum_curve_speed_factor: 0.3
+    curvature_speed_scale: 5.0
+    motion_gate_speed: 5.0
+    weights:
+      lane_keeping: 0.4
+      heading: 0.2
+      speed_tracking: 0.2
+      steering_smooth: 0.1
+      throttle_smooth: 0.1
+      longitudinal: 1.0
+
+  success_reward: 100.0
+  out_of_road_penalty: 20.0
+  crash_vehicle_penalty: 20.0
+  crash_object_penalty: 20.0
+  # Sidewalk contact may persist without ending the episode in MetaDrive 0.4.3.
+  # Keep this at zero to avoid applying a terminal-scale penalty every step.
+  crash_sidewalk_penalty: 0.0
+  out_of_route_done: true
+
+  vehicle_config:
+    lidar:
+      num_lasers: 120
+      distance: 50
+      num_others: 4
+    show_lidar: false
+    show_dest_mark: true
+    show_line_to_dest: true
+    show_line_to_navi_mark: true
+
+training:
+  total_timesteps: 2000000
+  num_envs: 4
+  learning_rate: 0.00005
+  n_steps: 512
+  batch_size: 256
+  n_epochs: 20
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.1
+  ent_coef: 0.0
+  checkpoint_freq: 50000
+
+evaluation:
+  episodes: 30
+  start_seed: 1000
+  deterministic: true
+
+video:
+  enabled: true
+  seed: 1000
+  fps: 10
+  frame_interval: 2
+  screen_size: 512
+  max_steps: 1500

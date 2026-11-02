@@ -1,0 +1,13 @@
+extends: v4_stable_turning.yaml
+
+experiment:
+  name: v4_guided_control
+
+environment:
+  skill_reward_config:
+    guided_lateral_gain: 0.45
+    guided_heading_gain: 0.9
+    weights:
+      steering_smooth: 0.1
+      straight_steering: 0.05
+      guided_steering: 0.4

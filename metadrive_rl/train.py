@@ -1,15 +1,22 @@
 from __future__ import annotations
 
 import argparse
+from functools import partial
 from pathlib import Path
 import traceback
 
 from stable_baselines3 import PPO
 from stable_baselines3.common.monitor import Monitor
+from stable_baselines3.common.vec_env import SubprocVecEnv
 
 from metadrive_rl.callbacks import CheckpointVideoCallback
 from metadrive_rl.config import PROJECT_ROOT, load_config
 from metadrive_rl.envs import make_env
+
+
+def build_training_env(config: dict):
+    """Top-level factory so Windows spawn can create MetaDrive workers."""
+    return Monitor(make_env(config))
 
 
 def parse_args() -> argparse.Namespace:
@@ -17,6 +24,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--config", default=str(PROJECT_ROOT / "configs" / "default.yaml"))
     parser.add_argument("--steps", type=int, help="Override total training timesteps")
     parser.add_argument("--resume", type=Path, help="Resume from a PPO .zip checkpoint")
+    parser.add_argument(
+        "--initialize-from",
+        type=Path,
+        help="Load policy/value weights but start a new experiment at step zero",
+    )
     return parser.parse_args()
 
 
@@ -36,7 +48,16 @@ def main() -> None:
     log_dir.mkdir(parents=True, exist_ok=True)
     video_dir.mkdir(parents=True, exist_ok=True)
 
-    env = Monitor(make_env(config))
+    num_envs = int(train_config.get("num_envs", 1))
+    if num_envs > 1:
+        env = SubprocVecEnv(
+            [partial(build_training_env, config) for _ in range(num_envs)],
+            start_method="spawn",
+        )
+    else:
+        env = Monitor(make_env(config))
+    if args.resume is not None and args.initialize_from is not None:
+        raise ValueError("Use either --resume or --initialize-from, not both")
     is_resuming = args.resume is not None
     if is_resuming:
         model = PPO.load(args.resume, env=env, tensorboard_log=str(log_dir))
@@ -57,6 +78,10 @@ def main() -> None:
             verbose=1,
             device="auto",
         )
+        if args.initialize_from is not None:
+            source_model = PPO.load(args.initialize_from, device=model.device)
+            model.set_parameters(source_model.get_parameters(), exact_match=True)
+            print(f"Initialized network weights from {args.initialize_from}; timestep counter reset to zero.")
 
     callback = CheckpointVideoCallback(
         save_freq=train_config["checkpoint_freq"],
@@ -96,7 +121,11 @@ def main() -> None:
         print(f"Error details: {error_path}")
         raise
     finally:
-        env.close()
+        try:
+            env.close()
+        except (BrokenPipeError, EOFError):
+            # A failed subprocess may already have closed its communication pipe.
+            pass
 
 
 if __name__ == "__main__":

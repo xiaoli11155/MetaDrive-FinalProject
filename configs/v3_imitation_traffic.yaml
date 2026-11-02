@@ -1,0 +1,15 @@
+extends: v3_imitation.yaml
+
+experiment:
+  name: v3_imitation_traffic
+
+environment:
+  traffic_density: 0.08
+  random_traffic: true
+
+evaluation:
+  episodes: 30
+  start_seed: 1000
+
+video:
+  seed: 1000

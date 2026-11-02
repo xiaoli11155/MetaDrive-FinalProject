@@ -1,0 +1,31 @@
+extends: low_density_after_no_traffic.yaml
+
+experiment:
+  name: low_density_lane_safe
+
+environment:
+  traffic_density: 0.08
+  traffic_reward_config:
+    straight_target_speed: 40.0
+    curve_target_speed: 20.0
+    intersection_yield_speed: 7.0
+    conflict_horizon: 6.0
+    weights:
+      lane_keeping: 0.4
+      yield_braking: 0.9
+      unsafe_acceleration: 1.2
+      risk_lateral_deviation: 1.2
+      risk_outward_drift: 1.5
+
+training:
+  total_timesteps: 750000
+  learning_rate: 0.00005
+  ent_coef: 0.001
+  checkpoint_freq: 50000
+
+evaluation:
+  episodes: 20
+  start_seed: 1000
+
+video:
+  seed: 1000

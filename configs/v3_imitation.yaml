@@ -1,0 +1,26 @@
+extends: v3_smooth_turning.yaml
+
+experiment:
+  name: v3_imitation
+
+environment:
+  # IDM demonstrations are actual steering commands. A hidden low-pass wrapper
+  # would make the student's executed action differ from the expert label.
+  control_smoothing: null
+  straight_target_speed: 45.0
+  curve_target_speed: 25.0
+
+training:
+  # Fine-tune conservatively so PPO does not immediately destroy the cloned policy.
+  learning_rate: 0.00005
+  ent_coef: 0.001
+
+imitation:
+  dataset: datasets/v3_imitation/idm_demonstrations.npz
+  episodes: 300
+  epochs: 30
+  batch_size: 512
+  learning_rate: 0.0003
+  validation_fraction: 0.1
+  initial_log_std: -2.0
+
