@@ -12,3 +12,22 @@ logs/v[1-4]_*/
 metrics/v[1-4]_*/
 videos/v[1-4]_*/
 
+# Local skill installation/cache directories.
+.ppt-master-official/
+.skill-backups/
+.skill-install-stage/
+
+# PPT Master intermediate artifacts; keep authored sources, figures, and final deck.
+ppt/ppt_master_projects/*/analysis/
+ppt/ppt_master_projects/*/backup/
+ppt/ppt_master_projects/*/exports/
+ppt/ppt_master_projects/*/icons/
+ppt/ppt_master_projects/*/images/
+ppt/ppt_master_projects/*/live_preview/
+ppt/ppt_master_projects/*/sources/
+ppt/ppt_master_projects/*/svg_final/
+ppt/ppt_master_projects/*/svg_output/
+ppt/ppt_master_projects/*/templates/
+ppt/ppt_master_projects/*/validation/
+ppt/*含视频.pptx
+

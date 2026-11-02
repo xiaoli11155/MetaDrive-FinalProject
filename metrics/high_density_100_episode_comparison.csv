@@ -1,0 +1,4 @@
+experiment,training_curriculum,checkpoint,episodes,start_seed,mean_reward,reward_std,success,collision,out_of_road,timeout
+high_density_basic,behavior_clone_to_high_density,ppo_metadrive_450000_steps.zip,100,1000,321.77,294.83,0.22,0.24,0.54,0.00
+high_density_after_no_traffic,behavior_clone_to_no_traffic_to_high_density,ppo_metadrive_700000_steps.zip,100,1000,457.56,367.66,0.41,0.24,0.35,0.00
+high_density_after_low_density,behavior_clone_to_no_traffic_to_low_density_to_high_density,ppo_metadrive_150000_steps.zip,100,1000,577.64,383.34,0.51,0.24,0.25,0.00

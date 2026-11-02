@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 from collections import Counter
 from pathlib import Path
 
@@ -17,6 +18,7 @@ def main() -> None:
     parser.add_argument("--episodes", type=int)
     parser.add_argument("--start-seed", type=int, help="Override evaluation start seed")
     parser.add_argument("--render", action="store_true")
+    parser.add_argument("--output-csv", type=Path, help="Write one diagnostic row per episode")
     parser.add_argument("--config", default=str(PROJECT_ROOT / "configs" / "default.yaml"))
     args = parser.parse_args()
 
@@ -33,6 +35,7 @@ def main() -> None:
     model = PPO.load(args.model)
     rewards: list[float] = []
     outcomes: Counter[str] = Counter()
+    episode_rows: list[dict] = []
 
     try:
         for episode in range(episodes):
@@ -40,21 +43,47 @@ def main() -> None:
             episode_reward = 0.0
             terminated = truncated = False
             final_info = {}
+            steps = 0
+            max_traffic_risk = 0.0
+            max_intersection_risk = 0.0
+            max_wrong_decision_action = 0.0
             while not (terminated or truncated):
                 action, _ = model.predict(
                     observation, deterministic=eval_config["deterministic"]
                 )
                 observation, reward, terminated, truncated, final_info = env.step(action)
                 episode_reward += float(reward)
+                steps += 1
+                max_traffic_risk = max(max_traffic_risk, float(final_info.get("traffic_risk", 0.0)))
+                max_intersection_risk = max(
+                    max_intersection_risk, float(final_info.get("intersection_risk", 0.0))
+                )
+                max_wrong_decision_action = max(
+                    max_wrong_decision_action,
+                    float(final_info.get("wrong_decision_action", 0.0)),
+                )
             rewards.append(episode_reward)
             if final_info.get("arrive_dest"):
-                outcomes["success"] += 1
+                outcome = "success"
             elif final_info.get("crash_vehicle") or final_info.get("crash_object"):
-                outcomes["collision"] += 1
+                outcome = "collision"
             elif final_info.get("out_of_road"):
-                outcomes["out_of_road"] += 1
+                outcome = "out_of_road"
             else:
-                outcomes["timeout"] += 1
+                outcome = "timeout"
+            outcomes[outcome] += 1
+            episode_rows.append(
+                {
+                    "seed": start_seed + episode,
+                    "outcome": outcome,
+                    "reward": episode_reward,
+                    "steps": steps,
+                    "route_completion": float(final_info.get("route_completion", 0.0)),
+                    "max_traffic_risk": max_traffic_risk,
+                    "max_intersection_risk": max_intersection_risk,
+                    "max_wrong_decision_action": max_wrong_decision_action,
+                }
+            )
     finally:
         env.close()
 
@@ -62,6 +91,13 @@ def main() -> None:
     print(f"mean reward: {np.mean(rewards):.2f} +/- {np.std(rewards):.2f}")
     for name in ("success", "collision", "out_of_road", "timeout"):
         print(f"{name}: {outcomes[name] / episodes:.1%}")
+    if args.output_csv:
+        args.output_csv.parent.mkdir(parents=True, exist_ok=True)
+        with args.output_csv.open("w", newline="", encoding="utf-8") as file:
+            writer = csv.DictWriter(file, fieldnames=episode_rows[0].keys())
+            writer.writeheader()
+            writer.writerows(episode_rows)
+        print(f"episode diagnostics: {args.output_csv}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,14 @@
+extends: low_density_basic.yaml
+
+experiment:
+  name: low_density_traffic_bc
+
+imitation:
+  dataset: datasets/low_density_traffic_bc/idm_demonstrations.npz
+  episodes: 300
+  epochs: 30
+  batch_size: 512
+  learning_rate: 0.0003
+  validation_fraction: 0.1
+  initial_log_std: -2.0
+

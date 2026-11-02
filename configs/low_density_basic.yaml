@@ -1,0 +1,12 @@
+extends: low_density_after_no_traffic.yaml
+
+experiment:
+  name: low_density_basic
+
+training:
+  total_timesteps: 750000
+
+evaluation:
+  episodes: 20
+  start_seed: 1000
+
